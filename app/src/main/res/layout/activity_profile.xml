@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/buttonshape">
+
+
+
+
+
+    <TextView
+        android:text="Name:"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/pname"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/pname"
+        android:layout_alignBottom="@+id/pname"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/prname"
+        android:layout_alignLeft="@+id/btn_change"
+        android:layout_alignStart="@+id/btn_change" />
+
+
+    <TextView
+        android:text="Age:"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="32sp"
+        android:layout_below="@+id/pname"
+        android:id="@+id/page"
+      />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/page"
+        android:layout_marginLeft="111dp"
+        android:layout_marginStart="111dp"
+        android:layout_alignBaseline="@+id/page"
+        android:layout_alignBottom="@+id/page"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/prage"
+        />
+    <TextView
+        android:text="Height:"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/page"
+        android:layout_alignRight="@+id/pweight"
+        android:layout_alignEnd="@+id/pweight"
+        android:id="@+id/pheight"/>
+
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/pheight"
+        android:layout_marginLeft="111dp"
+        android:layout_marginStart="111dp"
+        android:layout_alignBaseline="@+id/pheight"
+        android:layout_alignBottom="@+id/pheight"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/prheight" />
+
+    <TextView
+        android:text="Weight:"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/pweight"
+        android:layout_below="@+id/pheight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/pweight"
+        android:layout_marginLeft="111dp"
+        android:layout_marginStart="111dp"
+        android:layout_alignBaseline="@+id/pweight"
+        android:layout_alignBottom="@+id/pweight"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/prweight" />
+
+    <TextView
+        android:text="Last  Date:"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/pdate"
+        android:layout_below="@+id/pweight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/pdate"
+        android:layout_alignBottom="@+id/pdate"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/prdate"
+        android:layout_alignLeft="@+id/prweight"
+        android:layout_alignStart="@+id/prweight" />
+
+    <TextView
+        android:text="Contact:"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/pphone"
+        android:layout_below="@+id/pdate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/pphone"
+        android:layout_marginLeft="111dp"
+        android:layout_marginStart="111dp"
+        android:layout_alignBaseline="@+id/pphone"
+        android:layout_alignBottom="@+id/pphone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/prphone" />
+
+    <Button
+        android:text="Change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_change"
+        android:layout_marginTop="45dp"
+        android:onClick="onButtonClick"
+        android:layout_below="@+id/pphone"
+        android:layout_toRightOf="@+id/pdate"
+        android:layout_toEndOf="@+id/pdate"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp"
+        android:shadowColor="#FFFFFF"
+        android:textColor="#FFFF"
+        android:background="#FFEBEE"
+        />
+
+</RelativeLayout>
