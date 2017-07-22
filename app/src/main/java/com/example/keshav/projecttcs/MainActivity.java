@@ -23,6 +23,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity
 
@@ -185,12 +188,19 @@ public class MainActivity extends AppCompatActivity
         }
 
         else if (id == R.id.nav_logout) {
+            //firebase signOut
+            FirebaseAuth.getInstance().signOut();
 
-            /*loginn l = new loginn();
-            l.signOut();*/
-
-            //Auth.GoogleSignInApi.signOut(loginn.googleApi)
-
+            //Google signOut
+           /* Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            // [START_EXCLUDE]
+                            // aakash updateUI(false);
+                            // [END_EXCLUDE]
+                        }
+                    });*/
         }
         else if (id == R.id.nav_prof) {
 

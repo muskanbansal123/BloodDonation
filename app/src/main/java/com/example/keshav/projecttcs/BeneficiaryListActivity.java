@@ -74,7 +74,7 @@ public class BeneficiaryListActivity extends MainActivity implements Beneficiary
 
     private void getDetails(){
         listBeneficiary.clear();
-        dref.child("Donor").child("endUser").addValueEventListener(new ValueEventListener() {
+        dref.child("Donors").child("endUser").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
@@ -85,15 +85,15 @@ public class BeneficiaryListActivity extends MainActivity implements Beneficiary
                     dataRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot postSnapShot : dataSnapshot.child("Donor_deatils").getChildren()){
+                            for (DataSnapshot postSnapShot : dataSnapshot.child("Donors").getChildren()){
                                 requestList.clear();
                                 List<AcceptRequest> newList = new ArrayList<>();
                                 newList.clear();
 
                                 for (DataSnapshot Snapshot : postSnapShot.getChildren()){
-                                    String t = (String) Snapshot.child("name").getValue();
-                                    String c = (String) Snapshot.child("contact").getValue();
-                                    String ci = (String) Snapshot.child("message").getValue();
+                                    String t = (String) Snapshot.child("Name").getValue();
+                                    String c = (String) Snapshot.child("Contact").getValue();
+                                    String ci = (String) Snapshot.child("Message").getValue();
 
                                     AcceptRequest ar = new AcceptRequest(t, c, ci, (Boolean) Snapshot.child("requestPending").getValue());
                                     requestList.add(ar);
@@ -102,11 +102,11 @@ public class BeneficiaryListActivity extends MainActivity implements Beneficiary
                                 for (AcceptRequest x : requestList)
                                     newList.add(x);
 
-                                String name = (String) dataSnapshot.child("Donor_details").child("name").getValue();
-                                String contact = (String) dataSnapshot.child("Donor_details").child("contact").getValue();
-                                String city = (String) dataSnapshot.child("Donor_details").child("city").getValue();
-                                String bloodgroup = (String) dataSnapshot.child("Donor_details").child("bloodgroup").getValue();
-                                String email = (String) dataSnapshot.child("Donor_details").child("email").getValue();
+                                String name = (String) dataSnapshot.child("Donors").child("Name").getValue();
+                                String contact = (String) dataSnapshot.child("Donors").child("Contact").getValue();
+                                String city = (String) dataSnapshot.child("Donors").child("City").getValue();
+                                String bloodgroup = (String) dataSnapshot.child("Donors").child("Blood Group").getValue();
+                                String email = (String) dataSnapshot.child("Donors").child("Email").getValue();
 
                                 DonorDeatils x = new DonorDeatils(name, city, contact, bloodgroup, email);
                                 x.setRequests(newList);

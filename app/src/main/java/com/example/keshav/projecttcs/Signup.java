@@ -1,11 +1,8 @@
 package com.example.keshav.projecttcs;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
+
+
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -21,7 +18,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -33,20 +29,19 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  * Created by keshav on 21-06-2017.
  */
 
-public class Signup extends AppCompatActivity {
 
+public class Signup extends AppCompatActivity {
     EditText username, email, password, confirm, gender, age, contact, city, pincode, bloodgroup;
+
     Button createAccount;
     TextView already;
+
 
     String memail, musername, mpassword, mconfirm, mgender, mage, mcontact, mcity, mpincode, mbloodgroup;
 
@@ -60,7 +55,6 @@ public class Signup extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         mAuth = FirebaseAuth.getInstance();
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -68,11 +62,8 @@ public class Signup extends AppCompatActivity {
                 if (user != null) {
                     //User successfully Signed In
                     Log.d("Firebase", "onAuthStateChanged:signed_in:" + user.getUid());
-
-                    UserProfileChangeRequest up = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(username.getText().toString()).build();
-
-
+                    UserProfileChangeRequest up = new UserProfileChangeRequest.Builder().setDisplayName(username.getText().toString()).build();
+                    addtoFirebase();
                     user.sendEmailVerification()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -85,6 +76,7 @@ public class Signup extends AppCompatActivity {
                                 }
                             });
                     user.updateProfile(up);
+                    addtoFirebase();
                     finish();
                 } else {
                     //User Signed out
@@ -165,7 +157,7 @@ public class Signup extends AppCompatActivity {
                         }
                     }
                 });
-        addtoFirebase();
+
     }
 
     @Override
@@ -183,10 +175,12 @@ public class Signup extends AppCompatActivity {
     }
 
     private void addtoFirebase(){
+        Log.e("aakash","adding to firebase function");
         if (FirebaseAuth.getInstance().getCurrentUser() == null){
             Intent intent = new Intent(this, loginn.class);
             startActivity(intent);
         }else {
+            Log.e("aakash","else ran");
             String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             myRef = FirebaseDatabase.getInstance().getReference();
             myRef.child("Donors").child(Uid).child("Name").setValue(musername);
