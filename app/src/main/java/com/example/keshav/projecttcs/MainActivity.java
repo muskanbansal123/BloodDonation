@@ -26,8 +26,11 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.onesignal.OneSignal;
 
 public class MainActivity extends AppCompatActivity
+
 
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,6 +41,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +64,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        FirebaseUser user = loginn.mAuth.getCurrentUser();
+
+        String LoggedIn_User_Email = user.getEmail();
+        OneSignal.sendTag("USER_ID",LoggedIn_User_Email);
 
 
     }
@@ -208,18 +223,27 @@ public boolean onNavigationItemSelected(MenuItem item) {
         //Auth.GoogleSignInApi.signOut(loginn.googleApi)
 
         }
+
+        else if (id == R.id.nav_sendrequest) {
+
+            Intent intent = new Intent(this, Sendrequest.class);
+            startActivity(intent);
+            return true;
+        }
         else if (id == R.id.nav_prof) {
 
-        if (loginn.flag) {
-        Intent inte = new Intent(MainActivity.this, Profile.class);
-        startActivity(inte);
-        } else {
-        Intent inte = new Intent(MainActivity.this, loginn.class);
-        startActivity(inte);
+            if (loginn.flag) {
+                Intent inte = new Intent(MainActivity.this, Profile.class);
+                startActivity(inte);
+            }
+            else {
+                Intent inte = new Intent(MainActivity.this, loginn.class);
+                startActivity(inte);
+            }
 
         }
 
-        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -43,6 +43,12 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="Request"
             android:layout_width="match_parent" />
+
+        <item
+            android:id="@+id/nav_sendrequest"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Send"
+            android:layout_width="match_parent" />
     </group>
 
     <item android:title="Communicate">

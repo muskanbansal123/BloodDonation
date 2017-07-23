@@ -42,7 +42,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class loginn extends MainActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
-    private FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleApiClient mGoogleApiClient;
 
@@ -62,6 +62,9 @@ public class loginn extends MainActivity implements View.OnClickListener, Google
     Button mlogin;
     TextView createAccount;
 
+    static FirebaseUser user;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +73,13 @@ public class loginn extends MainActivity implements View.OnClickListener, Google
         setContentView(R.layout.activity_loginn);
 
         init();
+        //user = firebaseAuth.getCurrentUser();
 
         //Firebase Listener//
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     //User Signed In
                     Log.d("Firebase", "onAuthStateChanged:signed_in:" + user.getUid());
