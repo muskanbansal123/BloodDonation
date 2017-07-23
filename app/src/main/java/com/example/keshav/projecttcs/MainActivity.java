@@ -114,73 +114,79 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+@SuppressWarnings("StatementWithEmptyBody")
+@Override
+public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Toast.makeText(getApplicationContext(),"You are already on home",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"You are already on home",Toast.LENGTH_SHORT).show();
         }
         else if (id == R.id.nav_account) {
 
-            Intent intent = new Intent(MainActivity.this, Signup.class);
-            startActivity(intent);
-            return true;
+        Intent intent = new Intent(this, Signup.class);
+        startActivity(intent);
+        return true;
 
         }  else if (id == R.id.nav_log) {
 
-            if (Profile.flag)
-            {
+        if (loginn.flag)
+        {
 
-                Toast temp = Toast.makeText(this, "You are already logged in!", Toast.LENGTH_SHORT);
-                temp.show();            }
+        Toast temp = Toast.makeText(this, "You are already logged in!", Toast.LENGTH_SHORT);
+        temp.show();            }
 
-            else {
+        else {
 
-                Intent in = new Intent(MainActivity.this, loginn.class);
-                startActivity(in);
-                return true;
-            }
+        Intent in = new Intent(this, loginn.class);
+        startActivity(in);
+        return true;
+        }
 
         }else if (id == R.id.nav_gallery) {
 
-            Intent inte = new Intent(MainActivity.this, Camera.class);
-            startActivity(inte);
-            return true;
+        Intent inte = new Intent(MainActivity.this, Gallery.class);
+        startActivity(inte);
+        return true;
 
         } else if (id == R.id.nav_manage) {
 
-            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(intent);
 
 
         }else if (id == R.id.nav_req) {
 
-            Intent intent = new Intent(MainActivity.this, requestpage.class);
-            startActivity(intent);
-            return true;
+        Intent intent = new Intent(MainActivity.this, requestpage.class);
+        startActivity(intent);
+        return true;
 
         }
         else if (id == R.id.nav_update) {
 
-            if (Profile.flag) {
-                Intent inte = new Intent(MainActivity.this, Update.class);
-                startActivity(inte);
-            } else {
-                Intent inte = new Intent(MainActivity.this, loginn.class);
-                startActivity(inte);
+        if (loginn.flag) {
+        Intent inte = new Intent(MainActivity.this, Update.class);
+        startActivity(inte);
+        } else {
+        Intent inte = new Intent(MainActivity.this, loginn.class);
+        startActivity(inte);
 
-            }
+        }
 
-            return true;
+        return true;
 
         }else if (id == R.id.nav_share) {
 
-            Intent inte = new Intent(MainActivity.this, Gallery.class);
-            startActivity(inte);
+
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String shareBody = "your body here";
+        String shareSub = "your subject here";
+
+        intent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+        intent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(intent,"Share using"));
 
 
         } else if (id == R.id.nav_help) {
@@ -188,35 +194,35 @@ public class MainActivity extends AppCompatActivity
         }
 
         else if (id == R.id.nav_logout) {
-            //firebase signOut
+
             FirebaseAuth.getInstance().signOut();
 
-            //Google signOut
-           /* Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                    new ResultCallback<Status>() {
-                        @Override
-                        public void onResult(Status status) {
-                            // [START_EXCLUDE]
-                            // aakash updateUI(false);
-                            // [END_EXCLUDE]
-                        }
-                    });*/
+            Toast temp = Toast.makeText(this, "You are successfully logged out!", Toast.LENGTH_SHORT);
+            temp.show();
+            loginn.flag = false;
+
+
+            /*loginn l = new loginn();
+            l.signOut();*/
+
+        //Auth.GoogleSignInApi.signOut(loginn.googleApi)
+
         }
         else if (id == R.id.nav_prof) {
 
-            if (Profile.flag) {
-                Intent inte = new Intent(MainActivity.this, Profile.class);
-                startActivity(inte);
-            } else {
-                Intent inte = new Intent(MainActivity.this, loginn.class);
-                startActivity(inte);
+        if (loginn.flag) {
+        Intent inte = new Intent(MainActivity.this, Profile.class);
+        startActivity(inte);
+        } else {
+        Intent inte = new Intent(MainActivity.this, loginn.class);
+        startActivity(inte);
 
-            }
+        }
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
+        }
 
 }

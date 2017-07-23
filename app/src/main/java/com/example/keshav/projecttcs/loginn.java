@@ -46,6 +46,8 @@ public class loginn extends MainActivity implements View.OnClickListener, Google
     private FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleApiClient mGoogleApiClient;
 
+    static boolean flag;
+
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -171,6 +173,11 @@ public class loginn extends MainActivity implements View.OnClickListener, Google
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 Log.d("FireBase", "signInWithEmail:onComplete:" + task.isSuccessful());
 
+                                Toast temp = Toast.makeText(loginn.this, "Welcome!", Toast.LENGTH_SHORT);
+                                temp.show();
+
+                                flag = true;
+
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
@@ -216,6 +223,8 @@ public class loginn extends MainActivity implements View.OnClickListener, Google
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
+
+                flag = true;
             } else {
                 Log.i(TAG, "Failed SignIn");
                 Log.d(TAG, String.valueOf(result.getStatus()));
@@ -264,5 +273,11 @@ public class loginn extends MainActivity implements View.OnClickListener, Google
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
+        super.onBackPressed();
     }
 }

@@ -30,8 +30,6 @@ public class Profile extends MainActivity {
 
     Button display;
 
-    static boolean flag;
-
     DatabaseHelper helper = new DatabaseHelper(this);
 
     Profile profile;

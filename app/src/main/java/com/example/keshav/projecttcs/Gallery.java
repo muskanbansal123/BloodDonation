@@ -181,5 +181,11 @@ public class Gallery extends MainActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
+        super.onBackPressed();
+    }
 }
 

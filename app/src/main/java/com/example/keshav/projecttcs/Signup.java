@@ -54,6 +54,8 @@ public class Signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        already = (TextView)findViewById(R.id.link_login);
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -63,6 +65,13 @@ public class Signup extends AppCompatActivity {
                     //User successfully Signed In
                     Log.d("Firebase", "onAuthStateChanged:signed_in:" + user.getUid());
                     UserProfileChangeRequest up = new UserProfileChangeRequest.Builder().setDisplayName(username.getText().toString()).build();
+
+
+                   // Toast temp = Toast.makeText(Signup.this, "You are successfully registered!", Toast.LENGTH_SHORT);
+                    //temp.show();
+
+
+
                     addtoFirebase();
                     user.sendEmailVerification()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -99,9 +108,20 @@ public class Signup extends AppCompatActivity {
         bloodgroup = (EditText) findViewById(R.id.input_bloodgroup);
 
         createAccount = (Button) findViewById(R.id.Bsignupbutton);
-        already = (TextView) findViewById(R.id.link_login);
+        //already = (TextView) findViewById(R.id.link_login);
 
         mAuth.addAuthStateListener(mAuthListener);
+
+
+        already.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(Signup.this, loginn.class);
+                startActivity(intent);
+            }
+
+        });
     }
 
     public void sign_Up(View view) {
@@ -109,7 +129,7 @@ public class Signup extends AppCompatActivity {
         mpassword = password.getText().toString();
         musername = username.getText().toString();
         mconfirm = confirm.getText().toString();
-        mgender = confirm.getText().toString();
+        mgender = gender.getText().toString();
         mage = age.getText().toString();
         mcontact = contact.getText().toString();
         mcity = city.getText().toString();
@@ -132,6 +152,10 @@ public class Signup extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d("Firebase", "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+
+                        Toast temp = Toast.makeText(Signup.this, "You are successfully registered!", Toast.LENGTH_SHORT);
+                        temp.show();
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
@@ -191,6 +215,16 @@ public class Signup extends AppCompatActivity {
             myRef.child("Donors").child(Uid).child("City").setValue(mcity);
             myRef.child("Donors").child(Uid).child("PinCode").setValue(mpincode);
         }
+    }
+
+
+
+
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
+        super.onBackPressed();
     }
 }
 
