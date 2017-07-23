@@ -17,7 +17,7 @@ public class AcceptRequest implements Serializable {
         this.username = username;
         this.mobile = mobile;
         this.mesage = mesage;
-        this.requestPending = requestPending;
+        this.requestPending = requestPending;;
     }
 
     public String getUsername (){ return username; }
